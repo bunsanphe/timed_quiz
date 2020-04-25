@@ -1,0 +1,58 @@
+body {
+    font-family: “Cormorant Garamond”, serif;
+    padding-top: 50px;
+    background-color: lightgrey;
+}
+
+.col-lg-12 {
+    /* align-content: center; */
+    /* text-align: center; */
+    padding: 20px;
+    width: 800px;
+    max-width: 100%;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+#questions {
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+button {
+    margin: 10px;
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+}
+
+.btn {
+    background-color: white;
+}
+
+/* hide questions */
+.hide {
+    display: none;
+}
+
+
+.wrapper {
+    min-height: 100%;
+}
+.footer {
+    padding-top: 10px;
+    font-family: “Cormorant Garamond”, serif;
+    padding-bottom: 10px;
+    clear: both;
+    text-align: center;
+    border-top: maroon 5px solid;
+    position: absolute;
+    bottom: 0;
+    background-color: grey;
+    color: lightgrey;
+    width: 100%;
+}
