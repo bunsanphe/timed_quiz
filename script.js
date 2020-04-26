@@ -17,7 +17,7 @@ var totalTime = 0;
 //current elaspe
 var elapseTime = 10;
 var interval;
-var questionsAnswers = [
+var questions = [
     {   question: "Some psychologists, echoing Watson, point out that consciousness is subjective and 'if you can measure it...'",
         answers: [
             {text: "'you are in fact studying behavior'", correct: true},
@@ -100,29 +100,17 @@ var questionsAnswers = [
         },    
         
 ];
-//VARIABLES Potential HTML
-//Things in code
-//Start button
-//Start / Total seconds
-
-//current time html element
-//form /input to allow us to add our initials
-//questions - list array
-    //questions
-    //list of possible answers
-    //correct answer
 
 var randomQuestions;
 var currentQuestionIndex;
-//when the user clicks the start button we need to start the timer and prompt the first question
-startButton.addEventListener("click", start);
 
 //when the user clicks the start button we need to start the timer and prompt the first question
+startButton.addEventListener("click", start);
 function start() {
     startButton.classList.add("hide");
     questionContainer.classList.remove("hide");
     timerContentTag.classList.remove("hide");
-    randomQuestions = questionsAnswers.sort(() => Math.random() - .5)
+    randomQuestions = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0;
     setNextQuestion();
 
@@ -133,10 +121,9 @@ function start() {
 
         if(elapseTime === 0) {
             clearInterval(timerInterval);
-            gameEnd()
+            // gameEnd()
         }
     }, 1000);
-    setNextQuestion();
 }
 
 function setNextQuestion() {
@@ -164,55 +151,42 @@ function resetState() {
     }
 }
 
+
 //validate answer
 function selectAnswer(e) {
     var selectedAnswerButton = e.target;
-    var correctAnswer = selectedAnswerButton.dataset.correct;
-    // Array.from(answerTag.children).forEach(button => {
-    //     setStatusClass(button, button.dataset.correct)
-    // })
-    if ((randomQuestions > currentQuestionIndex.length + 1) && correctAnswer) {
-        //log correct 
+    var correct = selectedAnswerButton.dataset.correct;
+    if (randomQuestions.length > currentQuestionIndex +1) {
         currentQuestionIndex++
-        setNextQuestion()
-        
+        setNextQuestion();
     }
-    else if (randomQuestions === currentQuestionIndex.length) {
+    else{
         gameEnd()
-    }
-    else {
-        //reduce timer
-        // function setNewInterval() {
-        //     var secondsLeft;
-        //     secondsLeft = 
-        // }
-        // var timerInterval = setInterval(function() {
-            // timerTag.textContent = totalTime - 10;
-
-
-            // timerTag.textContent = totalTime
-    
-        //     if(totalTime === 0) {
-        //         clearInterval(timerInterval);
-        //         gameEnd()
-        //     }
-        // }, 1000);
-        //go to next question
-        currentQuestionIndex++
-        setNextQuestion()
     }
 }
 
-// function setCorrect {
-//     var correctCounter = 0
-    
+var score = 0
+//display correct or incorrect answer
+// function setStatusClass(element) {
+//     clearStatusClass(element)
+//     if (correct) {
+//         element.classList.add("correct");
+//         score++
+//         console.log(score)
+//     }
+//     else {
+//         element.classList.add("incorrect")
+//     }
+// }
+
+// function clearStatusClass(element) {
+//     element.classList.remove("correct")
+//     element.classList.remove('incorrect')
 // }
 
 restartButton.addEventListener("click", start);
 
-
 function gameEnd(){
-    //game end fx
     questionContainer.classList.add("hide");
     timerContentTag.classList.add("hide");
     introTag.classList.add("hide");
@@ -231,7 +205,6 @@ function gameEnd(){
         renderInit()
     })
         //display score
-        //provide an input to enter our initials
         //when the user submits their initials
     //add their high score to local storage
 }
@@ -253,4 +226,3 @@ function renderInit(){
     //calculate new current time left by subtracting totalTime - elaspeTime
     //check if timer has reached 0
         //end the game
-    //update the time left number in the html
