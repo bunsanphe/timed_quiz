@@ -11,11 +11,12 @@ var submitButton = document.getElementById("submit-button");
 var restartButton = document.getElementById("restart-button");
 var clearScoreButton = document.getElementById("clearScore-button");
 var initTag = document.getElementById("user");
+var scoreTag = document.getElementById("score");
 var scoreboardTag = document.getElementById("scoreboard");
 //current time left
 var totalTime = 0;
 //current elaspe
-var elapseTime = 10;
+var elapseTime = 60;
 var interval;
 var questions = [
     {   question: "Some psychologists, echoing Watson, point out that consciousness is subjective and 'if you can measure it...'",
@@ -44,58 +45,58 @@ var questions = [
         },
     {   question: "What is a lucid dream?",
         answers: [
-            {text: "a dream where you know you are dreaming", correct: true},
             {text: "a dream with unusually clear meaning", correct: false},
+            {text: "a dream where you know you are dreaming", correct: true},
             {text: "what Pieron called a limpid dream", correct: false},
             {text: "a dream vision of the future", correct: false},
             ]
         },    
     {   question: "Most psychologists agree hypnosis involves...",
         answers: [
-            {text: "hypersuggestibility", correct: true},
             {text: "synchronization of brain waves", correct: false},
+            {text: "hypersuggestibility", correct: true},
             {text: "eye fatigue", correct: false},
             {text: "the locus coeruleus", correct: false},
             ]
         },
     {   question: "Which would be categorized as a 'leading question' when interviewing somebody under hypnosis?",
         answers: [
-            {text: "Did the robber seem nervous?", correct: true},
             {text: "What did you do last night?", correct: false},
+            {text: "Did the robber seem nervous?", correct: true},
             {text: "What do you remember?", correct: false},
             {text: "Do you remember the face of the intruder?", correct: false},
             ]
         },
     {   question: "Many forms of meditation involve...",
         answers: [
-            {text: "stopping or ignoring the inner voice", correct: true},
             {text: "hypnosis by an expert, to get started", correct: false},
             {text: "the period of calmness right after a meal", correct: false},
+            {text: "stopping or ignoring the inner voice", correct: true},
             {text: "explorations of the thought processes, using the inner voice", correct: false},
             ]
         },
     {   question: "Which of the following is a narcotic?",
         answers: [
-            {text: "morphine", correct: true},
             {text: "cocaine", correct: false},
             {text: "marijuana", correct: false},
+            {text: "morphine", correct: true},
             {text: "PCP", correct: false},
             ]
         },
     {   question: "Alcohol myopia is said to be...",
         answers: [
-            {text: "a reason alcohol consumption is a risk factor for sexually transmitted diseases", correct: true},
             {text: "a factor which makes social interaction seem larger and close up", correct: false},
             {text: "the reason for blurry vision during intoxication", correct: false},
             {text: "similar in effect to marijuana myopia", correct: false},
+            {text: "a reason alcohol consumption is a risk factor for sexually transmitted diseases", correct: true},
             ]
         },
     {   question: "What is anandamide?",
         answers: [
-            {text: "a brain chemical which appears in the frontal lobes and hippocampus", correct: true},
             {text: "the active ingredient in nitrous oxide", correct: false},
             {text: "a chemical which counteracts or antagonizes the effect of marijuana", correct: false},
             {text: "a hallucinogenic designer drug", correct: false},
+            {text: "a brain chemical which appears in the frontal lobes and hippocampus", correct: true},
             ]
         },    
         
@@ -151,12 +152,18 @@ function resetState() {
     }
 }
 
-
+var score = 0
 //validate answer
 function selectAnswer(e) {
     var selectedAnswerButton = e.target;
     var correct = selectedAnswerButton.dataset.correct;
-    if (randomQuestions.length > currentQuestionIndex +1) {
+    if ((randomQuestions.length > currentQuestionIndex +1) && correct) {
+        currentQuestionIndex++
+        score++
+        console.log(score);
+        setNextQuestion();
+    }
+    else if(randomQuestions.length > currentQuestionIndex + 1) {
         currentQuestionIndex++
         setNextQuestion();
     }
@@ -165,7 +172,11 @@ function selectAnswer(e) {
     }
 }
 
-var score = 0
+// function scoreKeeper(){
+//     if (correct) {
+//         score++
+//     }
+// }
 //display correct or incorrect answer
 // function setStatusClass(element) {
 //     clearStatusClass(element)
@@ -192,7 +203,9 @@ function gameEnd(){
     introTag.classList.add("hide");
     submitFormTag.classList.remove("hide");
     scoreboardTag.classList.remove("hide");
-
+    var finalScore = score;
+    localStorage.setItem("score", finalScore);
+    
 
     // clearScoreButton.addEventListener("click", function () {
 
@@ -201,7 +214,6 @@ function gameEnd(){
         event.preventDefault();
         var init = document.querySelector("#initialInput").value;
         localStorage.setItem("initialInput", init);
-        localStorage.setItem("score", score);
         renderInit()
     })
         //display score
@@ -212,7 +224,10 @@ function gameEnd(){
 
 function renderInit(){
     var init = localStorage.getItem("initialInput");
+    var finalScore = localStorage.getItem("score");
     initTag.textContent = init;
+    scoreTag.textContent = finalScore;
+    
 }
 
 //ACTIONS
