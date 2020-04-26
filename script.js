@@ -201,11 +201,11 @@ function gameEnd(){
     var finalScore = score;
     localStorage.setItem("score", finalScore);
 
-    clearScoreButton.addEventListener("click", function (event) {
-        event.preventDefault();
+    // clearScoreButton.addEventListener("click", function (event) {
+    //     event.preventDefault();
 
-        clearScore();
-    });
+    //     clearScore();
+    // });
    
     submitButton.addEventListener("click", function(event){
         event.preventDefault();
@@ -225,9 +225,9 @@ function renderInit(){
     scoreTag.textContent = finalScore;  
 }
 
-function clearScore(){
+// function clearScore(){
  
-}
+// }
 
 //ACTIONS
 
