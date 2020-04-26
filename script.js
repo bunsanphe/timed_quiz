@@ -122,7 +122,7 @@ function start() {
 
         if(elapseTime === 0) {
             clearInterval(timerInterval);
-            // gameEnd()
+            gameEnd()
         }
     }, 1000);
 }
@@ -172,11 +172,6 @@ function selectAnswer(e) {
     }
 }
 
-// function scoreKeeper(){
-//     if (correct) {
-//         score++
-//     }
-// }
 //display correct or incorrect answer
 // function setStatusClass(element) {
 //     clearStatusClass(element)
@@ -205,29 +200,33 @@ function gameEnd(){
     scoreboardTag.classList.remove("hide");
     var finalScore = score;
     localStorage.setItem("score", finalScore);
-    
 
-    // clearScoreButton.addEventListener("click", function () {
+    clearScoreButton.addEventListener("click", function (event) {
+        event.preventDefault();
 
-    // };
+        clearScore();
+    });
+   
     submitButton.addEventListener("click", function(event){
         event.preventDefault();
         var init = document.querySelector("#initialInput").value;
         localStorage.setItem("initialInput", init);
         renderInit()
-    })
+    });
         //display score
         //when the user submits their initials
-    //add their high score to local storage
-}
 
+}
 
 function renderInit(){
     var init = localStorage.getItem("initialInput");
     var finalScore = localStorage.getItem("score");
     initTag.textContent = init;
-    scoreTag.textContent = finalScore;
-    
+    scoreTag.textContent = finalScore;  
+}
+
+function clearScore(){
+ 
 }
 
 //ACTIONS
@@ -239,5 +238,4 @@ function renderInit(){
 //we need to use an interval to create a countdown - setInterval(callback, 1000)
     //increment elaspe time
     //calculate new current time left by subtracting totalTime - elaspeTime
-    //check if timer has reached 0
-        //end the game
+ 
