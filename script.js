@@ -221,9 +221,16 @@ function gameEnd(){
 function renderInit(){
     var init = localStorage.getItem("initialInput");
     var finalScore = localStorage.getItem("score");
-    initTag.textContent = init;
-    scoreTag.textContent = finalScore;  
+    var newInit = document.createElement("p");
+    var newScore = document.createElement("p");
+    newInit.innerHTML = init;
+    console.log(newInit)
+    newScore.innerHTML = finalScore;
+    console.log(newScore)
+    initTag.appendChild(newInit);
+    scoreTag.appendChild(newScore);  
 }
+
 
 // function clearScore(){
  
