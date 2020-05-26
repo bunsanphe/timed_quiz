@@ -24,6 +24,9 @@ WHEN the game is over
 THEN I can save my initials and score
 ```
 
+### Deployment
+https://bunsanphe.github.io/timed_quiz/
+
 The following animation demonstrates the application functionality:
 
 ![code quiz](./Assets/04-web-apis-homework-demo.gif)
